@@ -74,6 +74,15 @@ int bl_getfd(bl_t);
 bl_info_t *bl_recv(bl_t);
 bool bl_isconnected(bl_t);
 
+#ifndef SYSLOG_DATA_INIT
+struct syslog_data {
+	int dummy;
+};
+#define SYSLOG_DATA_INIT  { 0 }
+
+extern void vsyslog_r(int, struct syslog_data *, const char *, va_list);
+#endif
+
 __END_DECLS
 
 #endif /* _BL_H */

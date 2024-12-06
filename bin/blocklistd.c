@@ -549,8 +549,10 @@ main(int argc, char *argv[])
 	if (!debug) {
 		if (daemon(0, 0) == -1)
 			err(EXIT_FAILURE, "daemon failed");
+#ifndef __illumos__
 		if (pidfile(NULL) == -1)
 			err(EXIT_FAILURE, "Can't create pidfile");
+#endif
 	}
 
 	for (size_t t = 0; !done; t++) {
